@@ -11,7 +11,7 @@ import {MatchInfo, SportsEvent} from "@/types/SportsData";
 // };
 
 const EventItem= ({icon, name, count, isPopular }) => {
-    var opacity = isPopular? "opacity-100": "opacity-0";
+    const opacity = isPopular ? "opacity-100" : "opacity-0";
     return (
         <div className="flex items-center justify-between bg-gray-900 p-1 rounded-lg hover:bg-white_10 hover:bg-opacity-50 transition duration-300 ease-in-out group" >
             <div className="flex items-center">

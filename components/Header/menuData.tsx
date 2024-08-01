@@ -4,13 +4,13 @@ const menuData: Menu[] = [
   {
     id: 1,
     title: "Sportsbook",
-    path: "/blog-sidebar",
+    path: "/sportsbook",
     newTab: false
   },
   {
     id: 2,
     title: "Transfer",
-    path: "/swap",
+    path: "/transfer",
     newTab: false,
   },
   {

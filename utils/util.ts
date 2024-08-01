@@ -6,6 +6,7 @@ import {MatchInfo, SportsData, SportsMatch} from "@/types/SportsData";
 import { format, isToday, isTomorrow } from 'date-fns';
 
 
+
 export async function balanceOf(contract: string) {
     try {
       if (window.ethereum.isConnected) {
@@ -166,6 +167,7 @@ export function getMatchesByCategoryAndGroup(
 ): MatchInfo[] {
   return sportsMatches[categoryID]?.[eventGroupID] ?? [];
 }
+
 
 
 

@@ -16,17 +16,19 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <>
+      <div className="bg-[url('/images/hero/background.png')] bg-cover h-full">
       <ScrollUp />
       <Hero />
-      <Features />
-      <Video />
-      <Brands />
-      <AboutSectionOne />
-      <AboutSectionTwo />
-      <Testimonials />
-      <Pricing />
-      <Blog />
-      <Contact />
+      {/*<Features />*/}
+      {/*<Video />*/}
+      {/*<Brands />*/}
+      {/*<AboutSectionOne />*/}
+      {/*<AboutSectionTwo />*/}
+      {/*<Testimonials />*/}
+      {/*<Pricing />*/}
+      {/*<Blog />*/}
+      {/*<Contact />*/}
+      </div>
     </>
   );
 }

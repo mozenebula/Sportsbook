@@ -1,15 +1,14 @@
 import React from 'react';
-import {SportsEvent} from "@/types/SportsData";
 import {getMatchesByCategoryAndGroup, formatDateTime, formatDate} from "@/utils/util";
-import {MatchInfo} from "@/types/SportsData";
+import {OddType, MatchInfo} from "@/types/SportsData";
 
-// type CustomButtonProps = {
-//     onClick: (event: React.MouseEvent<HTMLDivElement>, sportsEvent: SportsEvent) => void;
-//     sportsMatches: MatchInfo[];
-// };
+type CustomButtonProps = {
+    onClick: (match: MatchInfo, oddType: OddType) => void;
+    sportsMatches: MatchInfo[];
+};
 
 
-const SportsMatchItem = ({sportsMatches}) => {
+const SportsMatchItem: React.FC<CustomButtonProps> = ({onClick, sportsMatches}) => {
     const date = sportsMatches.length > 0? formatDate(sportsMatches[0].eventStart): ""
     return (
         <div className="mt-4 w-full">
@@ -29,19 +28,19 @@ const SportsMatchItem = ({sportsMatches}) => {
                     <div className="w-1/6 flex-col m-2">
                         <div className="text-center whitespace-nowrap overflow-hidden overflow-ellipsis">{match.participants[0].name}</div>
                         <button
-                            className="mt-4 bg-black rounded-lg p-2 bg-primary w-full">{match.odds.homeWin}
+                            className="mt-4  rounded-lg p-2 bg-primary w-full" onClick={() => onClick(match, OddType.homeWin)}>{match.odds.homeWin}
                         </button>
                     </div>
                     {match.odds.draw && <div className="basis-1/6 flex-col justify-center m-2 ">
                         <div  className="text-center whitespace-nowrap overflow-hidden overflow-ellipsis">Draw</div>
                         <button
-                            className="mt-4  rounded-lg p-2  bg-primary w-full">{match.odds.draw}
+                            className="mt-4  rounded-lg p-2  bg-primary w-full" onClick={() => onClick(match, OddType.draw)}>{match.odds.draw}
                         </button>
                     </div>}
                     <div className="w-1/6 flex-col justify-center m-2">
                         <div  className="text-center whitespace-nowrap overflow-hidden overflow-ellipsis">{match.participants[1].name}</div>
                         <button
-                            className="mt-4 rounded-lg p-2 bg-primary w-full">{match.odds.awayWin}
+                            className="mt-4 rounded-lg p-2 bg-primary w-full" onClick={() => onClick(match, OddType.awayWin)}>{match.odds.awayWin}
                         </button>
                     </div>
                 </div>

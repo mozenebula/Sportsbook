@@ -16,13 +16,6 @@ export const sportsEventsData: SportsEvent[] = [
     "isPopular": false
   },
   {
-    "category": "Basketball",
-    "categoryID": "BASKETBALL",
-    "eventGroup": "Olympic Basketball",
-    "eventGroupID": "Olympic_Basketball",
-    "isPopular": false
-  },
-  {
     "category": "Tennis",
     "categoryID": "TENNIS",
     "eventGroup": "Wimbledon Men Singles",
@@ -42,10 +35,13 @@ export const sportsEventsData: SportsEvent[] = [
 export const sportsMatches: SportsMatch = {
   "FOOTBALL": {
     "EURO_2024": [{
+      "category": "Football",
       "categoryID": "FOOTBALL",
-      "estimatedEnd": 1720288800,
-      "matchID": "34LzMgdpWRJ1tFcKpnk4zdgQXAwdxdTQwzmhF3oAQ8ZJ",
+      "eventGroup": "EURO 2024",
       "eventGroupID": "EURO_2024",
+      "estimatedEnd": 1720288800,
+      "name":"England vs Switzerland",
+      "matchID": "0x456e676c616e6420767320537769740000000000000000000000000000000001",
       "eventStart": 1720281600,
       "odds": {
         "homeWin": "2.1",
@@ -65,14 +61,15 @@ export const sportsMatches: SportsMatch = {
         }
       ]
     }, {
-      "categoryID":
-          "FOOTBALL",
+      "category": "Football",
+      "categoryID": "FOOTBALL",
+      "eventGroup": "EURO 2024",
+      "eventGroupID": "EURO_2024",
+      "name":"Spain vs Germany",
       "estimatedEnd":
           1720202400,
       "matchID":
           "87y1hYLW7YyPPs2mBUmex6BBTDwTQ77H5CTajt22M21x",
-      "eventGroupID":
-          "EURO_2024",
       "eventStart":
           1720195200,
       "odds":
@@ -102,10 +99,13 @@ export const sportsMatches: SportsMatch = {
   },
   "TENNIS": {
     "Wimbledon_Men_Singles": [{
+      "category": "Tennis",
       "categoryID": "TENNIS",
+      "eventGroup": "Wimbledon Men Singles",
+      "eventGroupID": "Wimbledon_Men_Singles",
+      "name": "Rafael Nadal vs Roger Federer",
       "estimatedEnd": 1720300000,
       "matchID": "1x2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p",
-      "eventGroupID": "Wimbledon_Men_Singles",
       "eventStart": 1720293600,
       "odds": {
         "homeWin": "1.8",
@@ -124,16 +124,18 @@ export const sportsMatches: SportsMatch = {
         }
       ]
     },
-      {
-      "categoryID": "TENNIS",
+      { "category": "Tennis",
+        "categoryID": "TENNIS",
+        "eventGroup": "Wimbledon Men Singles",
+        "eventGroupID": "Wimbledon_Men_Singles",
       "estimatedEnd": 1720314400,
       "matchID": "2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p1x",
-      "eventGroupID": "Wimbledon_Men_Singles",
       "eventStart": 1720308000,
       "odds": {
         "homeWin": "2.0",
         "awayWin": "1.9"
       },
+        "name": "Novak Djokovic vs Andy Murray",
       "participants": [
         {
           "id": "TENNIS-WIMBLEDON-MEN-DJO",
@@ -148,15 +150,18 @@ export const sportsMatches: SportsMatch = {
       ]
     }],
   "Wimbledon_Women_Singles": [{
+    "category": "Tennis",
     "categoryID": "TENNIS",
+    "eventGroup": "Wimbledon Women Singles",
+    "eventGroupID": "Wimbledon_Women_Singles",
     "estimatedEnd": 1720328800,
     "matchID": "3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p1x2y",
-    "eventGroupID": "Wimbledon_Women_Singles",
     "eventStart": 1720322400,
     "odds": {
       "homeWin": "1.7",
       "awayWin": "2.3"
     },
+    "name": "Serena Williams vs Naomi Osaka",
     "participants": [
       {
         "id": "TENNIS-WIMBLEDON-WOMEN-SER",
@@ -170,15 +175,18 @@ export const sportsMatches: SportsMatch = {
       }
     ]
   }, {
+    "category": "Tennis",
     "categoryID": "TENNIS",
+    "eventGroup": "Wimbledon Women Singles",
+    "eventGroupID": "Wimbledon_Women_Singles",
     "estimatedEnd": 1720343200,
     "matchID": "4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p1x2y3z",
-    "eventGroupID": "Wimbledon_Women_Singles",
     "eventStart": 1720336800,
     "odds": {
       "homeWin": "1.9",
       "awayWin": "2.1"
     },
+    "name": "Simona Halep vs Angelique Kerber",
     "participants": [
       {
         "id": "TENNIS-WIMBLEDON-WOMEN-HAL",

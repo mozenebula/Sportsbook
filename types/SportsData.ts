@@ -4,17 +4,31 @@ type EventParticipant = {
     typeName: string;
 }
 
+export enum OddType {
+    homeWin = "homeWin",
+    draw = "draw",
+    awayWin = "awayWin"
+}
+
 type Odds = {
     homeWin: string;
     draw?: string;
     awayWin: string
 }
 
+export type BetInfo = {
+    matchInfo: MatchInfo
+    oddType: OddType
+}
+
 export type MatchInfo = {
+    category: string;
     categoryID: string;
+    eventGroup: string;
     eventGroupID:string;
     estimatedEnd: number;
-    matchID:string
+    matchID:string;
+    name:string;
     eventStart: number;
     odds:Odds;
     participants: EventParticipant[];
@@ -38,5 +52,18 @@ export type SportsData = {
     football: SportsEvent[];
     basketball: SportsEvent[];
     tennis: SportsEvent[];
+}
+
+export type BetOrder = {
+    matchId: string,
+    betId: string,
+    uid: string,
+    option: string,
+    amount: string
+}
+
+export  type BetHistoryInfo = {
+    matchInfo: MatchInfo,
+    betOrder: BetOrder,
 }
 
