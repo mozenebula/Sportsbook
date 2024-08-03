@@ -1,5 +1,6 @@
 import { CoinInfo } from "@/types/coinInfo";
 import {Network} from "@/types/network";
+import {PopupInfo} from "@/types/popupInfo";
 
 
 export const coinData: CoinInfo[] = [
@@ -29,21 +30,39 @@ export const coinData: CoinInfo[] = [
     }
 ]
 
+
 export const RouterAddress = "0x4657901554d4cc9fd88379a6cb37b5bc647f7a48"
 
 export const OmniBetsAddress = "0x983C0c7bc6F04A871b26324CD40A67225162097b"
 
 export const OBUSDAddress = "0xCcB600331dAde64d5258ABa7e479A1617B917b93"
 
-export const networks: Network[] = [
+export const networks: CoinInfo[] = [
     {
         name: "Sepolia",
-        icon: "/images/ethereum.svg",
-        rpc: "https://sepolia.infura.io/v3/b77d80e759ce4c0e94276a0afa6ea0fa"
+        icon: "/images/swap/eth.png",
+        description: "",
+        contract: "https://sepolia.infura.io/v3/b77d80e759ce4c0e94276a0afa6ea0fa"
     },
     {
         name: "Shibuya",
-        icon: "/images/shibuya.svg",
-        rpc: "https://evm.shibuya.astar.network",
+        icon: "/images/shibuya.png",
+        description: "",
+        contract: "https://evm.shibuya.astar.network"
+    }
+]
+
+export const transferToken: CoinInfo[] = [
+    {
+        name: "OBUSD",
+        icon: "/images/OBUSD.png",
+        description: "Sepolia",
+        contract: "0xCcB600331dAde64d5258ABa7e479A1617B917b93"
+    },
+    {
+        name: "OBUSD_SHIBUYA",
+        icon: "/images/OBUSD.png",
+        description: "Shibuya",
+        contract: ""
     }
 ]

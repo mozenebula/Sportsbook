@@ -1,13 +1,13 @@
 'use client';
 import Link from "next/link";
 import Image from "next/image";
-import CoinSwapPopup from "@/components/Swap/CoinSwapPopup";
+import PopupPage from "@/components/Common/PopupPage";
 import { useState, useEffect } from "react";
 import { coinData, RouterAddress } from "@/public/config";
 import { CoinInfo } from "@/types/coinInfo";
 import SlipPopup from "@/components/Swap/SlipPopup";
 import { balanceOf, approve, addLiquidity } from "@/utils/util";
-import ChooseButton from "@/components/Swap/ChooseButton"
+import ChooseButton from "@/components/Common/ChooseButton"
 import DefaultButton from "@/components/Swap/DefaultButton";
 import { Contract, ethers } from "ethers";
 import { ABI } from "@/public/abi/abi";
@@ -241,7 +241,7 @@ const SwapPage = () => {
             </div>
           </div>
         </div>
-        {isPopupVisible&&<CoinSwapPopup coinInfos={postion == SWAP.Source? coinData.filter(item => item !=des): coinData.filter(item => item != source)} onItemSelected={onItemSelected}></CoinSwapPopup>}
+        {isPopupVisible&&<PopupPage coinInfos={postion == SWAP.Source? coinData.filter(item => item !=des): coinData.filter(item => item != source)} onItemSelected={onItemSelected} title="Add Liquidity"></PopupPage>}
         <div className="absolute left-0 top-0 z-[-1]">
           <svg
             width="1440"

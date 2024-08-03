@@ -1,13 +1,13 @@
 'use client';
 import Link from "next/link";
 import Image from "next/image";
-import CoinSwapPopup from "@/components/Swap/CoinSwapPopup";
+import PopupPage from "@/components/Common/PopupPage";
 import { useState, useEffect } from "react";
-import { coinData, RouterAddress } from "@/public/config";
+import { coinData, transferToken, networks } from "@/public/config";
 import { CoinInfo } from "@/types/coinInfo";
 import SlipPopup from "@/components/Swap/SlipPopup";
 import { balanceOf, approve, getAmountsOut, swapExactTokensForTokens } from "@/utils/util";
-import ChooseButton from "@/components/Swap/ChooseButton"
+import ChooseButton from "@/components/Common/ChooseButton"
 import DefaultButton from "@/components/Swap/DefaultButton";
 import { Contract, ethers } from "ethers";
 import { ABI } from "@/public/abi/abi";
@@ -23,10 +23,13 @@ const SportsbookPage = () => {
   const exceedStyle = {background: 'rgba(255, 83, 83, 0.2)',borderRadius: '16px',boxShadow: 'rgba(28, 28, 34, 0.33) 0px 3px 7px',}
 
 
-  const [source, setSource] = useState(coinData[0])
+  const [source, setSource] = useState(transferToken[0])
   const [des, setDes] = useState(null)
+  const [sourceNetwork, setSourceNetwork] = useState(networks[0])
+  const [desNetWork, setDesNetWork] = useState(networks[1])
   const [postion, setPosition] = useState(SWAP.Source)
   const [isPopupVisible, setPopupVisible] = useState(false)
+  const [isNetworkPopupVisible, setNetworkPopupVisible] = useState(false)
   const [isSlipVisible, setSlipVisble] = useState(false)
   const [slippageRate, setSlipageRate] = useState(0.02)
   const [sourceBalance, setSourceBalance] = useState(BigInt(0));
@@ -35,47 +38,26 @@ const SportsbookPage = () => {
   const [desValue, setDesValue] = useState(null)
   const [sourceCardstyle, setSourceCardStyle] = useState(null)
   const [desCardstyle, setDesCardStyle] = useState(null)
-  const [sourceApproved, setSourceApproved] = useState(false)
   const [buttonDisabled, setButtonDisabled] = useState(true)
-  const [buttonText, setButtonText] = useState(`Approve ${source.name}`)
 
   useEffect(()=> {
     const getSourceBalance = async () => {
       const balance = await balanceOf(source.contract)
       setSourceBalance(balance)
     }
-    setButtonText(`Approve ${source.name}`)
     getSourceBalance()
   }, [source])
 
-  useEffect(() => {
-    const getDesBalance = async () => {
-      if(des) {
-        const balance = await balanceOf(des.contract)
-        setDesBalance(balance)
-      } else {
-        setDesBalance(BigInt(0))
-      }
-    }
-    getDesBalance()
-  }, [des])
 
-  useEffect(() => {
-    const calculateOutFromIn = async () => {
-      if (sourceValue != null && des != null) {
-        const path = [source.contract, des.contract]
-        const out = await getAmountsOut(sourceValue, path)
-        console.log("Out ",  out)
-        setDesValue(Number(out))
-      }
-    }
-    calculateOutFromIn()
-  }, [sourceValue, des])
-
-  const togglePopup = (postion: SWAP) => {
+  const togglePopup = (position: SWAP) => {
     setPopupVisible(true)
     setPosition(postion)
   };
+
+  const toggleNetworkPopup = (position: SWAP) => {
+    setNetworkPopupVisible(true)
+    setPosition(position)
+  }
 
   const showSlip = () => {
     setSlipVisble(true)
@@ -100,27 +82,30 @@ const SportsbookPage = () => {
     }
   }
 
+  const onNetworkSelected = async(item: CoinInfo) => {
+    setNetworkPopupVisible(false)
+    if (item == null) {
+      return
+    }
+    if (postion == SWAP.Source) {
+      setSourceNetwork(item)
+    } else {
+      setDesNetWork(item)
+    }
+  }
+
   const change = ()=> {
-    var temp = des
+    let temp = des;
     setDes(source)
     setSource(temp)
+
+    temp = desNetWork
+    setDesNetWork(sourceNetwork)
+    setSourceNetwork(temp)
   }
 
   const handleClick = async () => {
-    if (window.ethereum&&window.ethereum.isConnected) {
-      if(sourceValue > 0 && sourceValue < sourceBalance && !sourceApproved) {
-        const sourceFlag =  await approve(source.contract, RouterAddress, sourceValue);
-        setSourceApproved(sourceFlag)
-        setButtonText("Swap")
-      }
-      if (!buttonDisabled && sourceApproved) {
-        const amountMin = desValue * (1 - slippageRate)
-        swapExactTokensForTokens(sourceValue, amountMin, [source.contract, des.contract], window.ethereum.selectedAddress)
-        setSourceApproved(false)
-      }
-    } else {
-      console.log('MetaMask is not installed');
-    }
+
   }
 
   const handleInputChange = async (e, position) => {
@@ -159,7 +144,7 @@ const SportsbookPage = () => {
                   <div className="border-b-[1px] border-[#0C3F6D] pb-3 lg:pb-6">
                     <div className="relative flex justify-between items-center">
                     <span className="text-[24px] font-bold">
-                    Swap
+                    Transfer
                     </span>
                       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="cursor-pointer" onClick={showSlip}>
                         <path
@@ -178,12 +163,12 @@ const SportsbookPage = () => {
                   <div className="w-full flex flex-row border-b-[1px] border-[#0C3F6D] pb-3 mb-6">
                     <label className="text-sm items-center mr-4">From</label>
                     <div
-                        className="flex flex-row items-center justify-between shrink-0 hover:bg-[#1a2451] rounded-md">
+                        className="flex flex-row items-center justify-between shrink-0 hover:bg-[#1a2451] rounded-md" onClick={() => toggleNetworkPopup(SWAP.Source)}>
                       <div className="flex shrink-0">
-                        <Image className="mr-2 shrink-0" src="/images/swap/eth.png" alt="" width="16" height="16"/>
+                        <Image className="mr-2 shrink-0" src={sourceNetwork.icon} alt="" width="16" height="16"/>
                       </div>
                       <div className="flex flex-col text-4 text-sm">
-                        <span className="text-white font-bold text-def text-sm">Ethereum</span></div>
+                        <span className="text-white font-bold text-def text-sm">{sourceNetwork.name}</span></div>
                       <svg viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg"
                            className="ml-2 mr-2 h-3 w-3">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -246,12 +231,12 @@ const SportsbookPage = () => {
                   <div className="w-full flex flex-row border-b-[1px] border-[#0C3F6D] pb-3 mb-6">
                     <label className="text-sm items-center mr-4">To</label>
                     <div
-                        className="flex flex-row items-center justify-between shrink-0  hover:bg-[#1a2451] rounded-md">
+                        className="flex flex-row items-center justify-between shrink-0  hover:bg-[#1a2451] rounded-md" onClick={() => toggleNetworkPopup(SWAP.Des)}>
                       <div className="flex shrink-0">
-                        <Image className="mr-2 shrink-0" src="/images/swap/eth.png" alt="" width="16" height="16"/>
+                        <Image className="mr-2 shrink-0" src={desNetWork.icon} alt="" width="16" height="16"/>
                       </div>
                       <div className="flex flex-col text-4 text-sm">
-                        <span className="text-white font-bold text-def text-sm">Ethereum</span></div>
+                        <span className="text-white font-bold text-def text-sm">{desNetWork.name}</span></div>
                       <svg viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg"
                            className="ml-2 mr-2 h-3 w-3">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -294,15 +279,18 @@ const SportsbookPage = () => {
                   <div
                       className={`bg-primary mx-auto max-w-[500px] mt-6 cursor-pointer rounded-lg flex lg:p-3 p-2 items-center justify-center cursor-not-allowed ${buttonDisabled ? "text-[#3A4164]" : "text-white"}`}
                       style={buttonDisabled ? buttonDisabledBg : buttonNolmalBg} onClick={handleClick}>
-                    <span className="flex text-[18px] normal-case lg:text-6 ">{buttonText}</span>
+                    <span className="flex text-[18px] normal-case lg:text-6 ">Transfer</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {isPopupVisible && <CoinSwapPopup
-              coinInfos={postion == SWAP.Source ? coinData.filter(item => item != des) : coinData.filter(item => item != source)}
-              onItemSelected={onItemSelected}></CoinSwapPopup>}
+          {isPopupVisible && <PopupPage
+              coinInfos={postion == SWAP.Source ? transferToken.filter(item => item.description == sourceNetwork.name) : transferToken.filter(item => item.description == desNetWork.name)}
+              onItemSelected={onItemSelected} title="Select Token"></PopupPage>}
+          {isNetworkPopupVisible && <PopupPage
+              coinInfos={postion == SWAP.Source ? networks : networks.filter(item => item != sourceNetwork)}
+              onItemSelected={onNetworkSelected} title="Select Network"></PopupPage>}
           <div className="absolute left-0 top-0 z-[-1]">
             <svg
                 width="1440"

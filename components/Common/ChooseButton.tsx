@@ -4,7 +4,7 @@ import Image from "next/image";
 const ChooseButton = ({coinInfo}) => {
     return (
     <div className="w-full flex relative flex-col max-w-[200px]">
-    <div className="flex items-center justify-between mb-4 flex items-center rounded-[30px] text-def lg:text-[24px] font-medium cursor-pointer">
+    <div className="justify-between mb-4 flex items-center rounded-[30px] text-def lg:text-[24px] font-medium cursor-pointer">
       <div className="flex items-center p-1 shrink-0 bg-white_10 rounded-[30px]">
       <div className="flex shrink-0">
         <Image className="mr-2 shrink-0" src={coinInfo.icon} alt="" width="36" height="36"/>
