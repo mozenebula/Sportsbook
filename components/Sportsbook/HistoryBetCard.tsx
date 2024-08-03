@@ -33,9 +33,8 @@ const HistoryBetCard: React.FC<BetHistoryProps> = ({betHistoryInfo}) => {
                 const decodedError = betContract.interface.parseError(error.data).args.toString();
                 if (decodedError.trim() == "You lost") {
                     setButtonText("You lost");
-                } else {
-                    alert(decodedError)
                 }
+                alert(decodedError)
 
             } else {
                 console.error("Error:", error);

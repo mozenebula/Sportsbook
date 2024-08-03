@@ -40,6 +40,9 @@ const BetOrderCard: React.FC<BetOderProps> = ({betInfo}) => {
             console.log('Transaction successful:', transaction);
         } catch (error) {
             console.error('Error calling contract method:' + error);
+            const decodedError = betContract.interface.parseError(error.data).args.toString();
+            alert(decodedError)
+
         }
     }
 

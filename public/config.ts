@@ -1,6 +1,5 @@
 import { CoinInfo } from "@/types/coinInfo";
 import {Network} from "@/types/network";
-import {PopupInfo} from "@/types/popupInfo";
 
 
 export const coinData: CoinInfo[] = [

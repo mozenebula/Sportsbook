@@ -1,10 +1,6 @@
 "use client"
 
-import RelatedPost from "@/components/Blog/RelatedPost";
-import SharePost from "@/components/Blog/SharePost";
-import TagButton from "@/components/Blog/TagButton";
 import EventItem from "@/components/Sportsbook/EventItem";
-import NewsLatterBox from "@/components/Contact/NewsLatterBox";
 import {Accordion, AccordionItem, CardProvider, Divider} from "@nextui-org/react";
 import React, {useEffect, useState} from "react";
 import {sportsMatches, sportsEventsData} from "@/public/sportsData";

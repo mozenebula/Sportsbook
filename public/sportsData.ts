@@ -39,10 +39,10 @@ export const sportsMatches: SportsMatch = {
       "categoryID": "FOOTBALL",
       "eventGroup": "EURO 2024",
       "eventGroupID": "EURO_2024",
-      "estimatedEnd": 1720288800,
+      "estimatedEnd": 1722655774,
       "name":"England vs Switzerland",
       "matchID": "0x456e676c616e6420767320537769740000000000000000000000000000000001",
-      "eventStart": 1720281600,
+      "eventStart": 1722655774,
       "odds": {
         "homeWin": "2.1",
         "draw": "1.9",
@@ -67,11 +67,11 @@ export const sportsMatches: SportsMatch = {
       "eventGroupID": "EURO_2024",
       "name":"Spain vs Germany",
       "estimatedEnd":
-          1720202400,
+          1722771000,
       "matchID":
           "87y1hYLW7YyPPs2mBUmex6BBTDwTQ77H5CTajt22M21x",
       "eventStart":
-          1720195200,
+          1722655774,
       "odds":
           {
             "homeWin":

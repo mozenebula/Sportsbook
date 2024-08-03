@@ -137,14 +137,14 @@ export function getCurrentUnixTimestamp(): number {
 }
 
 
-export function formatDate(timestamp: number): string {
-  const date = new Date(timestamp);
+export function formatDate(timestamp: string): string {
+  const date = new Date(parseInt(timestamp) * 1000);
   return format(date, 'EEEE, d MMMM, yyyy');
 }
 
 
 export function formatDateTime(timestamp: number): string {
-  const date = new Date(timestamp);
+  const date = new Date(timestamp * 1000);
 
   const timePart = format(date, 'HH:mm');
   let datePart: string;
