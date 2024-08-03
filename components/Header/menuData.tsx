@@ -16,7 +16,7 @@ const menuData: Menu[] = [
   {
     id: 3,
     title: "Lend",
-    path: "/blog",
+    path: "/feature",
     newTab: false,
   },
   {
@@ -27,13 +27,13 @@ const menuData: Menu[] = [
       {
         id: 41,
         title: "Transfer",
-        path: "/about",
+        path: "/feature",
         newTab: false,
       },
       {
         id: 42,
         title: "NFTFI",
-        path: "/contact",
+        path: "/feature",
         newTab: false,
       }
     ],
@@ -45,14 +45,14 @@ const menuData: Menu[] = [
     submenu: [
       {
         id: 51,
-        title: "SWAP",
-        path: "/swap",
+        title: "Swap",
+        path: "/feature",
         newTab: false,
       },
       {
         id: 52,
         title: "Liquidity",
-        path: "/liquidity",
+        path: "/feature",
         newTab: false,
       }
     ],
