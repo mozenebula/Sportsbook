@@ -9,7 +9,7 @@ type CustomButtonProps = {
 
 
 const SportsMatchItem: React.FC<CustomButtonProps> = ({onClick, sportsMatches}) => {
-    const date = sportsMatches.length > 0? formatDate(sportsMatches[0].eventStart): ""
+    const date = sportsMatches.length > 0? formatDate(sportsMatches[0].eventStart.toString()): ""
     return (
         <div className="mt-4 w-full">
             <div
